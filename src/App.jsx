@@ -80,7 +80,6 @@ import {
   useLocation,
   Navigate,
   useNavigate,
-  Link,
 } from 'react-router-dom';
 
 import Navbar from './pages/user/Navbar';
@@ -95,14 +94,12 @@ import Home from './pages/user/Home';
 import UserDashboard from './pages/user/Dashboard';
 import ApplyJob from './pages/user/ApplyJob';
 import UpdateProfile from './pages/user/UpdateProfile';
-import JobList from './pages/user/JobList';
 
 // Admin Pages
 import AdminDashboard from './pages/admin/Dashboard';
 import CreateJob from './pages/admin/CreateJob';
 import ViewApplicants from './pages/admin/ViewApplicants';
 import CompaniesList from './pages/admin/CompaniesList';
-
 import TestSchedule from './pages/admin/TestSchedule';
 import PortalSettings from './pages/admin/PortalSettings';
 
@@ -116,9 +113,12 @@ const PrivateRoute = ({ auth, allowedRoles, children }) => {
 };
 
 // App Routes
-const AppRoutes = ({ auth }) => (
+const AppRoutes = ({ auth, onAuthChange }) => (
   <Routes>
-    <Route path="/auth" element={<AuthPage />} />
+    <Route path="/" element={<Navigate to="/auth" />} />
+    <Route path="/auth" element={<AuthPage onAuthChange={onAuthChange} />} />
+
+    {/* User Routes */}
     <Route
       path="/user/home"
       element={
@@ -151,6 +151,7 @@ const AppRoutes = ({ auth }) => (
         </PrivateRoute>
       }
     />
+
     {/* Admin Routes */}
     <Route
       path="/admin/dashboard"
@@ -184,14 +185,6 @@ const AppRoutes = ({ auth }) => (
         </PrivateRoute>
       }
     />
-    {/* <Route
-      path="/admin/memberships"
-      element={
-        <PrivateRoute auth={auth} allowedRoles={['admin']}>
-          <MembershipDetails />
-        </PrivateRoute>
-      }
-    /> */}
     <Route
       path="/admin/test-schedule"
       element={
@@ -211,18 +204,26 @@ const AppRoutes = ({ auth }) => (
   </Routes>
 );
 
-// Main Layout Wrapper
+// Layout Wrapper
 const AppWrapper = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [auth, setAuth] = useState(isAuthenticated());
 
-  // Hide layout on these routes
   const hideLayoutPaths = ['/auth'];
 
   useEffect(() => {
     setAuth(isAuthenticated());
   }, [location]);
+
+  const onAuthChange = (status) => {
+    setAuth(status);
+    if (status) {
+      const role = getRole();
+      if (role === 'admin') navigate('/admin/dashboard');
+      else if (role === 'user') navigate('/user/home');
+    }
+  };
 
   const handleLogout = () => {
     localStorage.removeItem('token');
@@ -237,7 +238,7 @@ const AppWrapper = () => {
     <div className="flex flex-col min-h-screen">
       {!shouldHideLayout && auth && <Navbar onLogout={handleLogout} />}
       <main className="flex-grow bg-gray-50">
-        <AppRoutes auth={auth} />
+        <AppRoutes auth={auth} onAuthChange={onAuthChange} />
       </main>
       {!shouldHideLayout && <Footer />}
     </div>
