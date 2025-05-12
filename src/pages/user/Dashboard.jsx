@@ -59,12 +59,13 @@ const Dashboard = () => {
   const [userData, setUserData] = useState({
     name: 'John Doe',
     email: 'john.doe@example.com',
-    number: '+91-9876543210',
+    number: '+91-9005550055',
     resume: '',
     education: 'Bachelor of Technology in Computer Science',
     college: 'National Institute of Technology',
     address: '123, MG Road, Bangalore, India',
-    languages: 'English, Hindi, Kannada',
+    languages: 'English, Tamil, Telugu',
+    skills: ['React', 'Node.js', 'Java', 'Tailwind CSS', 'Git', 'JavaScript'],
     socialLinks: 'https://linkedin.com/in/johndoe',
     awards: 'Best Student Developer 2023',
     projects: 'Job Portal App, E-Commerce Site, LMS System',
@@ -130,6 +131,23 @@ const Dashboard = () => {
           ) : null
         )}
         <div>
+            <section className="bg-white shadow rounded p-6">
+  <h3 className="text-xl font-semibold mb-4"> Skills</h3>
+  {userData.skills && userData.skills.length > 0 ? (
+    <div className="flex flex-wrap gap-2">
+      {userData.skills.map((skill, index) => (
+        <span
+          key={index}
+          className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium"
+        >
+          {skill}
+        </span>
+      ))}
+    </div>
+  ) : (
+    <p className="text-gray-500">No skills added yet.</p>
+  )}
+</section>
           {/* <p className="font-semibold">Resume:</p>
           {userData.resume ? (
             <a href={userData.resume} target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">

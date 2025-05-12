@@ -340,8 +340,8 @@ const AuthPage = () => {
       className="min-h-screen bg-cover bg-center flex items-center justify-center px-4"
       style={{ backgroundImage: `url(${backgroundImage})`}}
     >
-      <div className="w-full max-w-md bg-white bg-opacity-90 rounded-2xl shadow-2xl p-8 sm:p-10">
-        <h2 className="text-3xl font-bold text-center text-blue-700 mb-6 drop-shadow-sm">
+      <div className="w-full max-w-md bg-white bg-opacity-70 rounded-2xl shadow-2xl p-8 sm:p-10">
+        <h2 className="text-3xl font-bold text-center text-blue-600 mb-6 drop-shadow-sm">
           {isRegister ? 'Register as User' : 'Login to Job Portal'}
         </h2>
 

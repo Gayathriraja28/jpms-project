@@ -152,7 +152,7 @@ const Home = () => {
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
       {/* Search Panel */}
-      <div className="flex flex-col md:flex-row gap-4 items-center justify-between bg-purple-100 p-4 rounded-xl shadow">
+      <div className="flex flex-col md:flex-row gap-4 items-center justify-between bg-white-100 p-4 rounded-xl shadow">
         <div className="flex-1 flex items-center gap-2 bg-white px-4 py-2 rounded-lg">
           <Search className="text-gray-500" />
           <input
@@ -181,7 +181,7 @@ const Home = () => {
             ))}
           </select>
         </div>
-        <button className="bg-purple-600 text-white px-6 py-2 rounded-xl font-semibold hover:bg-purple-700 transition">
+        <button className="bg-blue-600 text-white px-6 py-2 rounded-xl font-semibold hover:bg-purple-700 transition">
           Search
         </button>
       </div>
@@ -193,11 +193,11 @@ const Home = () => {
       </div>
 
       {/* Job Cards */}
-      <div className="mt-10 grid gap-6">
+      <div className="mt-10 grid gap-6 ">
         {filteredJobs.map((job) => (
           <div
             key={job.id}
-            className="border border-gray-300 p-4 rounded-xl shadow hover:shadow-md transition bg-white flex flex-col gap-2"
+            className="border border-gray-300 p-4 rounded-xl shadow hover:shadow-md transition bg-white-100 flex flex-col gap-2"
           >
             <span className="text-sm text-red-800 bg-green-300 px-2 py-0.5 rounded-full w-max font-medium">Urgently hiring</span>
 
