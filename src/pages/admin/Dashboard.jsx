@@ -150,7 +150,7 @@ const AdminDashboard = () => {
         </div>
 
         <div className="bg-white p-6 rounded-xl shadow">
-          <h2 className="text-xl font-semibold mb-2">Portal Settings</h2>
+          <h2 className="text-xl font-semibold mb-2">Admin Settings</h2>
           <button
             className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700"
             onClick={() => navigate('/admin/settings')}

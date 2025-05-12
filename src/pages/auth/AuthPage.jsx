@@ -286,7 +286,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { login, register } from '../../utils/auth';
-
+import backgroundImage from '../../assets/background.jpg';
 const AuthPage = () => {
   const [isRegister, setIsRegister] = useState(false);
   const [formData, setFormData] = useState({
@@ -294,7 +294,7 @@ const AuthPage = () => {
     email: '',
     password: '',
     retypePassword: '',
-    workStatus: 'experienced' // default
+    workStatus: 'experienced'
   });
 
   const navigate = useNavigate();
@@ -320,14 +320,12 @@ const AuthPage = () => {
         alert('User already exists.');
       }
     } else {
-      // Check if the user is an admin
       const isAdmin = login('admin', formData.email, formData.password);
       if (isAdmin) {
         navigate('/admin/dashboard');
         return;
       }
 
-      // Check if the user is a regular user
       const isUser = login('user', formData.email, formData.password);
       if (isUser) {
         navigate('/user/home');
@@ -338,8 +336,11 @@ const AuthPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-cyan-600 via-gray-500 to-gray-600 flex items-center justify-center px-4">
-      <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl p-8 sm:p-10">
+    <div
+      className="min-h-screen bg-cover bg-center flex items-center justify-center px-4"
+      style={{ backgroundImage: `url(${backgroundImage})`}}
+    >
+      <div className="w-full max-w-md bg-white bg-opacity-90 rounded-2xl shadow-2xl p-8 sm:p-10">
         <h2 className="text-3xl font-bold text-center text-blue-700 mb-6 drop-shadow-sm">
           {isRegister ? 'Register as User' : 'Login to Job Portal'}
         </h2>
@@ -356,8 +357,6 @@ const AuthPage = () => {
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               />
-
-              {/* Work Status Selection */}
               <div className="space-y-1">
                 <label className="block text-gray-700 font-medium">Work Status</label>
                 <select
@@ -366,8 +365,8 @@ const AuthPage = () => {
                   onChange={handleChange}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
-                  <option value="experienced">I'm experienced – I have work experience (excluding internships)</option>
-                  <option value="fresher">I'm a fresher – I am a student / Haven't worked after graduation</option>
+                  <option value="experienced">I'm experienced – I have work experience</option>
+                  <option value="fresher">I'm a fresher – I am a student / haven't worked</option>
                 </select>
               </div>
             </>
@@ -427,3 +426,4 @@ const AuthPage = () => {
 };
 
 export default AuthPage;
+

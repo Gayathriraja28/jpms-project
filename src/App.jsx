@@ -82,7 +82,7 @@ import {
   useNavigate,
 } from 'react-router-dom';
 
-import Navbar from './pages/user/Navbar';
+import AdminNavbar from './pages/user/Navbar';
 import Footer from './components/Footer';
 import { isAuthenticated, getRole } from './utils/auth';
 
@@ -94,7 +94,7 @@ import Home from './pages/user/Home';
 import UserDashboard from './pages/user/Dashboard';
 import ApplyJob from './pages/user/ApplyJob';
 import UpdateProfile from './pages/user/UpdateProfile';
-
+import CompanyReviews from './pages/user/CompanyReviews';
 // Admin Pages
 import AdminDashboard from './pages/admin/Dashboard';
 import CreateJob from './pages/admin/CreateJob';
@@ -102,7 +102,7 @@ import ViewApplicants from './pages/admin/ViewApplicants';
 import CompaniesList from './pages/admin/CompaniesList';
 import TestSchedule from './pages/admin/TestSchedule';
 import PortalSettings from './pages/admin/PortalSettings';
-
+import Navbar from './pages/admin/Navbar';
 // Protected Route Wrapper
 const PrivateRoute = ({ auth, allowedRoles, children }) => {
   const role = getRole();
@@ -143,6 +143,9 @@ const AppRoutes = ({ auth, onAuthChange }) => (
         </PrivateRoute>
       }
     />
+    
+    <Route
+    path="/user/company-reviews" element={ <CompanyReviews />} />
     <Route
       path="/apply/:jobId"
       element={

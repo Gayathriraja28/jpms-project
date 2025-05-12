@@ -53,6 +53,7 @@
 
 // export default Dashboard;
 import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 const Dashboard = () => {
   const [userData, setUserData] = useState({
@@ -82,14 +83,18 @@ const Dashboard = () => {
     notifications: true,
     preference: 'email',
   });
+  const location =useLocation();
 
   useEffect(() => {
     const savedProfile = JSON.parse(localStorage.getItem('userProfile'));
     if (savedProfile) setUserData(savedProfile);
+    
+     const savedAppliedJobs = JSON.parse(localStorage.getItem('appliedJobs')) || [];
+    setAppliedJobs(savedAppliedJobs);
 
-    const savedSettings = JSON.parse(localStorage.getItem('userSettings'));
-    if (savedSettings) setSettings(savedSettings);
-  }, []);
+    // const savedSettings = JSON.parse(localStorage.getItem('userSettings'));
+    // if (savedSettings) setSettings(savedSettings);
+  }, [location]);
 
   const handleSettingsChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -235,7 +240,7 @@ const Dashboard = () => {
 
       {/* Assessments */}
       <section className="bg-white shadow rounded p-6">
-        <h3 className="text-xl font-semibold mb-4">🧠 Assessments</h3>
+        <h3 className="text-xl font-semibold mb-4"> Assessments</h3>
         <ul className="list-disc list-inside mt-2 text-gray-700">
           <li>JavaScript Coding Test - Not Attempted</li>
           <li>Soft Skills Assessment - Completed</li>
