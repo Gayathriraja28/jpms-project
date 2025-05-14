@@ -16,7 +16,8 @@ const UpdateProfile = () => {
     projects: '',
     certifications: '',
     nationality: '',
-    speciallyAbled: '',
+    skill:'',
+  
   });
 
   useEffect(() => {
@@ -33,7 +34,7 @@ const UpdateProfile = () => {
       projects: 'Job Portal, E-commerce Website',
       certifications: 'React Developer Certificate',
       nationality: 'Indian',
-      speciallyAbled: 'No',
+      skill: 'C,Java',
     };
     setUser(storedUser);
   }, []);
@@ -55,12 +56,12 @@ const UpdateProfile = () => {
     { name: 'college', label: 'College / University' },
     { name: 'address', label: 'Address' },
     { name: 'languages', label: 'Languages Known' },
-    { name: 'socialLinks', label: 'Social Media / LinkedIn' },
+    { name: 'socialLinks', label: 'Social Links' },
     { name: 'awards', label: 'Awards / Achievements' },
     { name: 'projects', label: 'Projects' },
-    { name: 'certifications', label: 'Courses & Certifications' },
+    { name: 'certifications', label: ' Certifications' },
     { name: 'nationality', label: 'Nationality' },
-    { name: 'speciallyAbled', label: 'Specially Abled (Yes/No)' },
+    { name: 'skill', label: 'Skills' },
   ];
 
   return (

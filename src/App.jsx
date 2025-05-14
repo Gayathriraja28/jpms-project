@@ -95,11 +95,16 @@ import UserDashboard from './pages/user/Dashboard';
 import ApplyJob from './pages/user/ApplyJob';
 import UpdateProfile from './pages/user/UpdateProfile';
 import CompanyReviews from './pages/user/CompanyReviews';
+import Assessments from './pages/user/Assessments';
+import Settings from './pages/user/Settings';
+import Feedback from './pages/user/Feedback';
+
+
 // Admin Pages
 import AdminDashboard from './pages/admin/Dashboard';
 import CreateJob from './pages/admin/CreateJob';
 import ViewApplicants from './pages/admin/ViewApplicants';
-import CompaniesList from './pages/admin/CompaniesList';
+
 import TestSchedule from './pages/admin/TestSchedule';
 import PortalSettings from './pages/admin/PortalSettings';
 import Navbar from './pages/admin/Navbar';
@@ -154,6 +159,10 @@ const AppRoutes = ({ auth, onAuthChange }) => (
         </PrivateRoute>
       }
     />
+     <Route path="/user/assessments" element={<Assessments />} />
+  <Route path="/user/settings" element={<Settings />} />
+  <Route path="/user/feedback" element={<Feedback />} />
+
 
     {/* Admin Routes */}
     <Route
@@ -180,14 +189,14 @@ const AppRoutes = ({ auth, onAuthChange }) => (
         </PrivateRoute>
       }
     />
-    <Route
+    {/* <Route
       path="/admin/companies"
       element={
         <PrivateRoute auth={auth} allowedRoles={['admin']}>
           <CompaniesList />
         </PrivateRoute>
       }
-    />
+    /> */}
     <Route
       path="/admin/test-schedule"
       element={

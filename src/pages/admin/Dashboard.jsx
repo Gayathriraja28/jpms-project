@@ -128,11 +128,11 @@ const AdminDashboard = () => {
         Welcome, Admin! Here you can manage job listings, view applicants, and handle portal settings.
       </p>
 
-      <div className="grid gap-6 grid-cols-1 sm:grid-cols-3 mb-10">
+      <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 mb-10">
         <div className="bg-white p-6 rounded-xl shadow">
           <h2 className="text-xl font-semibold mb-2">Post a New Job</h2>
           <button
-            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-900"
             onClick={() => navigate('/admin/create-job')}
           >
             Create Job
@@ -142,7 +142,7 @@ const AdminDashboard = () => {
         <div className="bg-white p-6 rounded-xl shadow">
           <h2 className="text-xl font-semibold mb-2">Applications Enrolled</h2>
           <button
-            className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-900"
             onClick={() => navigate('/admin/applicants')}
           >
             View Applicants
@@ -152,22 +152,14 @@ const AdminDashboard = () => {
         <div className="bg-white p-6 rounded-xl shadow">
           <h2 className="text-xl font-semibold mb-2">Admin Settings</h2>
           <button
-            className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700"
+            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-900"
             onClick={() => navigate('/admin/settings')}
           >
             Manage Settings
           </button>
         </div>
 
-        <div className="bg-white p-6 rounded-xl shadow">
-          <h2 className="text-xl font-semibold mb-2">Companies</h2>
-          <button
-            className="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700"
-            onClick={() => navigate('/admin/companies')}
-          >
-            View Companies
-          </button>
-        </div>
+     
 
         {/* <div className="bg-white p-6 rounded-xl shadow">
           <h2 className="text-xl font-semibold mb-2">Memberships</h2>
@@ -180,9 +172,9 @@ const AdminDashboard = () => {
         </div> */}
 
         <div className="bg-white p-6 rounded-xl shadow">
-          <h2 className="text-xl font-semibold mb-2">Test Schedule</h2>
+          <h2 className="text-xl font-semibold mb-2">Schedule Assessment</h2>
           <button
-            className="bg-yellow-600 text-white px-4 py-2 rounded hover:bg-yellow-700"
+            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-900"
             onClick={() => navigate('/admin/test-schedule')}
           >
             View Schedule

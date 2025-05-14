@@ -56,7 +56,7 @@ const PortalSettings = () => {
       </div>
 
       {/* Theme Color */}
-      <div className="mb-4">
+      {/* <div className="mb-4">
         <label className="block font-semibold mb-1">Theme Color</label>
         <input
           type="color"
@@ -65,10 +65,10 @@ const PortalSettings = () => {
           onChange={handleChange}
           className="w-16 h-10 border rounded"
         />
-      </div>
+      </div> */}
 
       {/* Maintenance Mode */}
-      <div className="mb-4">
+      {/* <div className="mb-4">
         <label className="inline-flex items-center">
           <input
             type="checkbox"
@@ -79,7 +79,7 @@ const PortalSettings = () => {
           />
           Enable Maintenance Mode
         </label>
-      </div>
+      </div> */}
 
       <hr className="my-6" />
 
@@ -124,7 +124,7 @@ const PortalSettings = () => {
       {/* Save Button */}
       <button
         onClick={handleSave}
-        className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 w-full"
+        className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-900 w-full"
       >
         Save Settings
       </button>

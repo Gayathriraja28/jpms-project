@@ -4,6 +4,7 @@ const TestSchedule = () => {
   const [tests, setTests] = useState([]);
   const [formData, setFormData] = useState({
     companyname: '',
+    id:'',
     title: '',
     date: '',
     time: '',
@@ -14,10 +15,10 @@ const TestSchedule = () => {
   };
 
   const handleAddTest = () => {
-    const { companyname, title, date, time } = formData;
+    const { companyname,id, title, date, time } = formData;
     if (companyname && title && date && time) {
       setTests([...tests, formData]);
-      setFormData({ companyname: '', title: '', date: '', time: '' });
+      setFormData({ companyname: '',id:'', title: '', date: '', time: '' });
     }
   };
 
@@ -28,13 +29,21 @@ const TestSchedule = () => {
 
   return (
     <div className="max-w-xl mx-auto bg-white p-6 rounded shadow">
-      <h2 className="text-xl font-semibold mb-4">Test Schedule</h2>
+      <h2 className="text-xl font-semibold mb-4">Schedule Assessment</h2>
       <div className="space-y-3 mb-4">
         <input
           type="text"
           name="companyname"
           placeholder="Company Name"
           value={formData.companyname}
+          onChange={handleChange}
+          className="w-full p-2 border rounded"
+        />
+        <input
+          type="text"
+          name="id"
+          placeholder="Test Id"
+          value={formData.id}
           onChange={handleChange}
           className="w-full p-2 border rounded"
         />
@@ -60,7 +69,7 @@ const TestSchedule = () => {
           onChange={handleChange}
           className="w-full p-2 border rounded"
         />
-        <button onClick={handleAddTest} className="w-full bg-green-600 text-white py-2 rounded">
+        <button onClick={handleAddTest} className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-900">
           Add Test
         </button>
       </div>
@@ -69,7 +78,7 @@ const TestSchedule = () => {
         {tests.map((test, idx) => (
           <li key={idx} className="border p-3 rounded bg-gray-50 flex justify-between items-center">
             <div>
-              <strong>{test.companyname}</strong> scheduled <strong>{test.title}</strong> assessment on {test.date} at {test.time}
+              <strong>{test.companyname}</strong> scheduled <strong>{test.id} {test.title}</strong> assessment on {test.date} at {test.time}
             </div>
             <button
               onClick={() => handleDeleteTest(idx)}
