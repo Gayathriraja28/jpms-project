@@ -2,49 +2,24 @@ import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 const Dashboard = () => {
-  const [userData, setUserData] = useState({
-    name: 'John Doe',
-    email: 'john.doe@example.com',
-    number: '+91-9005550055',
-    resume: '',
-    education: 'Bachelor of Technology in Computer Science',
-    college: 'National Institute of Technology',
-    address: '123, MG Road, Bangalore, India',
-    languages: 'English, Tamil, Telugu',
-    skills: 'React, Node.js, Java, Tailwind CSS, Git, JavaScript',
-    socialLinks: 'https://linkedin.com/in/johndoe',
-    awards: 'Best Student Developer 2023',
-    projects: 'Job Portal App, E-Commerce Site, LMS System',
-    courses: 'ReactJS, NodeJS, Data Structures',
-    certifications: 'AWS Cloud Practitioner, Google UX Design',
-    nationality: 'Indian',
-  });
-
+  const [userData, setUserData] = useState({});
   const [appliedJobs, setAppliedJobs] = useState([]);
   const location = useLocation();
 
   useEffect(() => {
-    const savedProfile = JSON.parse(localStorage.getItem('user'));
-    if (savedProfile) setUserData(savedProfile);
+    const savedProfile = JSON.parse(localStorage.getItem('user')) || {};
+    setUserData(savedProfile);
 
     const savedAppliedJobs = JSON.parse(localStorage.getItem('appliedJobs')) || [];
     setAppliedJobs(savedAppliedJobs);
   }, [location]);
 
-  const getStatusStyle = (status) => {
-    switch (status) {
-      case 'Application Sent':
-        return 'text-blue-500';
-      case 'Resume Shortlisted':
-        return 'text-indigo-600';
-      case 'Assessment':
-        return 'text-purple-600';
-      case 'Accepted':
-        return 'text-green-600';
-      case 'Rejected':
-        return 'text-red-600';
-      default:
-        return 'text-yellow-600';
+  const handleWithdraw = (jobIndex) => {
+    if (window.confirm('Are you sure you want to withdraw this application?')) {
+      const updatedJobs = [...appliedJobs];
+      updatedJobs.splice(jobIndex, 1);
+      setAppliedJobs(updatedJobs);
+      localStorage.setItem('appliedJobs', JSON.stringify(updatedJobs));
     }
   };
 
@@ -63,11 +38,28 @@ const Dashboard = () => {
             </div>
           ) : null
         )}
+
+        {/* Resume in Profile */}
+        <div>
+          <p className="font-semibold">Resume (in Profile):</p>
+          {userData.resume ? (
+            <a
+              href={userData.resume}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-600 underline"
+            >
+              View Resume
+            </a>
+          ) : (
+            <p className="text-gray-500">No resume uploaded</p>
+          )}
+        </div>
       </section>
 
-      {/* Application Tracking Section */}
+      {/* Applied Jobs Section */}
       <div className="bg-white shadow rounded p-6">
-        <h3 className="text-xl font-semibold mb-4"> Application Tracking</h3>
+        <h3 className="text-xl font-semibold mb-4">Application Status</h3>
         {appliedJobs.length === 0 ? (
           <p className="text-gray-500">You haven’t applied to any jobs yet.</p>
         ) : (
@@ -76,12 +68,50 @@ const Dashboard = () => {
               <li key={index} className="py-4">
                 <p className="font-bold text-lg">{job.title}</p>
                 <p className="text-sm text-gray-700">Company: {job.company}</p>
-                <p className={`text-sm font-semibold ${getStatusStyle(job.status || 'Application Sent')}`}>
+
+                <p
+                  className={`text-sm font-semibold ${
+                    job.status === 'Accepted'
+                      ? 'text-green-600'
+                      : job.status === 'Rejected'
+                      ? 'text-red-600'
+                      : job.status === 'Assessment'
+                      ? 'text-indigo-600'
+                      : job.status === 'Resume Shortlisted'
+                      ? 'text-blue-600'
+                      : 'text-yellow-500'
+                  }`}
+                >
                   Status: {job.status || 'Application Sent'}
                 </p>
+
                 {job.applicant?.coverLetter && (
                   <p className="text-sm mt-1 text-gray-500">Cover Letter: {job.applicant.coverLetter}</p>
                 )}
+
+                {/* Resume Used in Application */}
+                <div className="mt-1">
+                  <p className="font-semibold text-sm">Resume (used in application):</p>
+                  {job.applicant?.resume ? (
+                    <a
+                      href={job.applicant.resume}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-600 underline text-sm"
+                    >
+                      View Applied Resume
+                    </a>
+                  ) : (
+                    <p className="text-gray-500 text-sm">No resume used</p>
+                  )}
+                </div>
+
+                <button
+                  onClick={() => handleWithdraw(index)}
+                  className="mt-2 px-4 py-1 bg-red-500 text-white rounded hover:bg-red-600 text-sm"
+                >
+                  Withdraw Application
+                </button>
               </li>
             ))}
           </ul>
