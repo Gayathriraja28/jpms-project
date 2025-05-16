@@ -45,11 +45,12 @@ const Dashboard = () => {
           {userData.resume ? (
             <a
               href={userData.resume}
+              download="profile_resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="text-blue-600 underline"
             >
-              View Resume
+              Download Resume
             </a>
           ) : (
             <p className="text-gray-500">No resume uploaded</p>
@@ -95,11 +96,12 @@ const Dashboard = () => {
                   {job.applicant?.resume ? (
                     <a
                       href={job.applicant.resume}
+                      download="applied_resume.pdf"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-blue-600 underline text-sm"
                     >
-                      View Applied Resume
+                      Download Applied Resume
                     </a>
                   ) : (
                     <p className="text-gray-500 text-sm">No resume used</p>
